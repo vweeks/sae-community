@@ -1,0 +1,33 @@
+cff-version: 1.2.0
+title: "Scientific Agentic Engineering Community Repository"
+message: "If you use this work, please cite it as below."
+type: software
+authors:
+  - family-names: Weeks
+    given-names: Victor
+    orcid: "https://orcid.org/0009-0004-9935-1042"
+    affiliation: "NSF National Center for Atmospheric Research (NSF NCAR)"
+doi: "10.5281/zenodo.23197744"
+repository-code: "https://github.com/vweeks/sae-community"
+url: "https://vweeks.github.io/scientific-agentic-engineering/"
+abstract: >-
+  A curated starter set of templates and examples for developing scientific
+  software with AI coding agents: a scientific Model Context Protocol (MCP)
+  server template, a Python units-checking skill, an adversarial-review agent
+  configuration, and an example project instruction file. Developed as part
+  of the 2026 Better Scientific Software (BSSw) Fellowship project
+  "Maintaining Scientific Rigor in AI-Assisted Development: A
+  Validation-Focused Methodology."
+keywords:
+  - Scientific Agentic Engineering
+  - agentic AI
+  - Model Context Protocol
+  - agent skills
+  - scientific software validation
+  - research software engineering
+  - BSSw Fellowship
+license:
+  - MIT
+  - CC-BY-4.0
+version: "1.0.0"
+date-released: "2026-10-31"
