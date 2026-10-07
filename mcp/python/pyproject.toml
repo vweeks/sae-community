@@ -1,0 +1,29 @@
+[project]
+name = "scidata-mcp"
+version = "0.1.0"
+description = "A template MCP server that gives an agent read-only, bounded access to scientific datasets."
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.11"
+dependencies = [
+    "mcp>=2.3,<3",
+    "netCDF4>=1.6",
+    "numpy>=1.26",
+    "xarray>=2024.1",
+]
+
+[project.scripts]
+scidata-mcp = "scidata_mcp.server:main"
+
+[dependency-groups]
+test = ["cftime>=1.6", "pytest>=8"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.ruff]
+line-length = 110
+
+[tool.ruff.lint]
+extend-select = ["I", "E501"]

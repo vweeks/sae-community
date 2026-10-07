@@ -1,0 +1,48 @@
+<!--
+  Ten questions for evaluating how well an agent answers from the server instead of from
+  assumption. Each answer depends only on the fixture files in ../fixtures/data, so it never
+  changes. Format: the evaluation file used by Anthropic's mcp-builder skill. Several
+  questions are traps: the answer an agent would guess differs from what the data declares.
+-->
+<evaluation>
+  <qa_pair>
+    <question>Among the datasets this server provides, which one has a time variable on a calendar with no leap days? Answer with its dataset id.</question>
+    <answer>model_grid.nc</answer>
+  </qa_pair>
+  <qa_pair>
+    <question>In station_obs.nc, what is the 2 m air temperature at station number 102 at 06:00 UTC on 1 January 2026, in the units the file declares? Answer with a whole number.</question>
+    <answer>2</answer>
+  </qa_pair>
+  <qa_pair>
+    <question>In station_obs.nc, how many hourly precipitation values are missing for station number 102? Answer with an integer.</question>
+    <answer>3</answer>
+  </qa_pair>
+  <qa_pair>
+    <question>In station_obs.nc, what is the total precipitation over the whole record at station number 101, in the units the file declares? Answer with the number only, rounded to one decimal place.</question>
+    <answer>2.2</answer>
+  </qa_pair>
+  <qa_pair>
+    <question>In station_obs.nc, which data variable has no units attribute? Answer with the variable name.</question>
+    <answer>rh</answer>
+  </qa_pair>
+  <qa_pair>
+    <question>In model_grid.nc, the precipitation flux is stored packed. What integer type is it stored as? Answer with the type name as the server reports it.</question>
+    <answer>int16</answer>
+  </qa_pair>
+  <qa_pair>
+    <question>What calendar date is the first time step in model_grid.nc? Answer in YYYY-MM-DD form.</question>
+    <answer>2026-01-01</answer>
+  </qa_pair>
+  <qa_pair>
+    <question>What units does the ocean profile dataset declare for salinity? Answer with the units string exactly as declared.</question>
+    <answer>psu</answer>
+  </qa_pair>
+  <qa_pair>
+    <question>In the ocean profile dataset, at what depth does the temperature first fall below 10 degrees? Answer with the depth in metres, as a whole number.</question>
+    <answer>200</answer>
+  </qa_pair>
+  <qa_pair>
+    <question>In model_grid.nc, at which longitude is the near-surface air temperature highest on the first time step? Answer with the longitude in degrees east, as a whole number.</question>
+    <answer>275</answer>
+  </qa_pair>
+</evaluation>
