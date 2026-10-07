@@ -1,0 +1,6 @@
+# Codex-only settings. Other tools ignore this file; SKILL.md is the skill.
+interface:
+  display_name: "Unit check"
+  short_description: "Check declared units and time encodings before using the values"
+policy:
+  allow_implicit_invocation: true
