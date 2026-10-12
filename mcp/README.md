@@ -106,6 +106,11 @@ Point `--data-root` at your own NetCDF directory when you're ready. The server r
 ending in `.nc`, `.nc4`, or `.netcdf`, in subdirectories too, and nothing outside that
 directory.
 
+This repository's plugin also installs the server (see the
+[top-level README](../README.md)) for Claude Code, which asks you for the data directory.
+The Codex plugin leaves it out, because a Codex plugin has no way to ask; use the
+`config.toml` entry above.
+
 ## Two ways to connect
 
 - **stdio** (the default). Your agent tool starts the server as a child process and talks

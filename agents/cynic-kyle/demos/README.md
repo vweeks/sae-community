@@ -1,7 +1,8 @@
 # Demonstrations
 
-Three briefs, each with the files it cites. Install the agent (see the
-[agent README](../README.md)), start your agent tool in one demo folder, and ask:
+Three briefs, each with the files it cites. Install the agent at user level or through the plugin (see the
+[agent README](../README.md)), so your tool finds it from any folder. Then start your agent
+tool in one demo folder and ask:
 
 > Have cynic-kyle review the plan in brief.md.
 

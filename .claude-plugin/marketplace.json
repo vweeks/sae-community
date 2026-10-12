@@ -1,0 +1,15 @@
+{
+  "name": "sae-community",
+  "owner": {
+    "name": "Victor Weeks"
+  },
+  "description": "Agent configurations for scientific software: a skill, an MCP server template, and a subagent.",
+  "plugins": [
+    {
+      "name": "sae-community",
+      "source": ".",
+      "description": "unit-check skill, Cynicχl subagent, and scidata-mcp server for scientific software work.",
+      "category": "development"
+    }
+  ]
+}

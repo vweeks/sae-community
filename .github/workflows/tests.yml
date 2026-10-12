@@ -1,0 +1,33 @@
+name: tests
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  unit-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v10
+      - run: uv run --python 3.12 --with pytest --with pint --with netCDF4 --with numpy pytest -q tests/unit-check
+
+  agent-and-plugin-files:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v10
+      - run: uv run --python 3.12 --with pytest pytest -q tests/cynic-kyle tests/plugins
+
+  scidata-mcp:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: mcp/python
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v10
+      - run: uv run --locked --group test pytest -q tests ../conformance

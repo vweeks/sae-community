@@ -55,8 +55,9 @@ everyone who works on the project. User folders apply to all your projects.
 | Codex | `cynic-kyle.toml` | `.codex/agents/` | `~/.codex/agents/` |
 
 This repository's Claude Code plugin also includes it (see the
-[top-level README](../../README.md)). Codex's documentation doesn't say whether plugins can
-carry custom agents, so for Codex, copy the file.
+[top-level README](../../README.md)). Installed that way, its name carries the plugin's
+prefix: `sae-community:cynic-kyle`. Codex plugins carry skills and MCP servers but not
+custom agents (checked in Codex 0.162.1), so for Codex, copy the file.
 
 Each tool says "read-only" its own way, and this is the one line that differs between the
 two files:
@@ -71,6 +72,9 @@ Ask for it by name, with the decision or claim and where its evidence is:
 - Claude Code: "Use the cynic-kyle subagent to review this plan before we run it", or
   `@agent-cynic-kyle`. Claude may also delegate to it on its own when the description fits.
 - Codex: "Have cynic-kyle review this plan before we run it."
+
+If you installed it through the Claude Code plugin, use `sae-community:cynic-kyle` in place
+of `cynic-kyle`.
 
 The model writes a different report each run, so the demos are for trying the agent out,
 not tests with fixed answers.

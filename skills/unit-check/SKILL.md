@@ -18,14 +18,17 @@ wrong. Check what the data declares before you write code that depends on it.
 
 ## How to run it
 
-Run from this skill's directory, in an environment that has pint (and netCDF4 for `scan`).
-If they are missing, `uv run` installs them from the script's header; otherwise ask the user
-before installing anything.
+Run from this skill's directory. The checker needs pint (and netCDF4 for `scan`); `uv run`
+installs them from the script's header:
 
 ```
-python scripts/unit_check.py require "<declared>" "<expected>"
-python scripts/unit_check.py scan <file.nc> [--expect VAR=UNITS ...] [--json]
+uv run scripts/unit_check.py require "<declared>" "<expected>"
+uv run scripts/unit_check.py scan <file.nc> [--expect VAR=UNITS ...] [--json]
 ```
+
+Without uv, use `python` in an environment that has pint and netCDF4. The first `uv run`
+downloads them, so if your sandbox blocks network access, ask the user to allow it. If the
+checker can't run, say so; reading the metadata another way is not the check.
 
 - `require` compares one declared units string, from any source, with the units the code
   expects. Pass `""` when nothing was declared.
