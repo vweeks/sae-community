@@ -1,6 +1,6 @@
 {
   "name": "sae-community",
-  "version": "0.1.0",
+  "version": "0.9.0",
   "description": "unit-check skill, Cynicχl reviewer (agent and skill), and scidata-mcp server for scientific software work.",
   "author": {
     "name": "Victor Weeks"

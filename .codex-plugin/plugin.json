@@ -1,6 +1,6 @@
 {
   "name": "sae-community",
-  "version": "0.1.0",
+  "version": "0.9.0",
   "description": "unit-check skill and cynic-kyle-review skill for scientific software work.",
   "skills": "./skills/",
   "interface": {

@@ -1,7 +1,8 @@
 # Contributing
 
-This repository doesn't take contributions. The artifacts are meant to be taken into your
-own project and changed there; that is how to use them, and nothing needs to come back here.
+This repository doesn't take contributions, and it has no issue tracker. The artifacts are
+meant to be taken into your own project and changed there; that is how to use them, and
+nothing needs to come back here.
 
 ## Adapting an artifact
 
@@ -22,11 +23,3 @@ Copy what you need (see [Install](README.md#install)), then make it fit your pro
   demo 1, or invents problems in demo 2, the edit made it worse.
 - **`AGENTS.md`.** Fill the slots and delete what doesn't apply, as
   [`agents-md/README.md`](agents-md/README.md#using-the-template) describes.
-
-## Reporting a problem
-
-Open an issue on GitHub. Say what you ran, which tool and version, what you expected, and
-what happened. For the skill or the subagent, include what you asked the agent and what it
-did, since a model's behavior varies from run to run.
-
-Issues are read until the repository is archived after April 2027; fixes aren't promised.

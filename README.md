@@ -133,8 +133,8 @@ It is a curated starter set: templates and examples that demonstrate practices, 
 be copied and adapted. It is not a package registry or a software distribution platform.
 
 It will be archived (made read-only) after the fellowship ends in April 2027, and no
-maintenance is promised before or after that. [`CONTRIBUTING.md`](CONTRIBUTING.md) covers
-adapting an artifact and reporting a problem.
+maintenance is promised before or after that. It doesn't take contributions or issues;
+[`CONTRIBUTING.md`](CONTRIBUTING.md) covers adapting an artifact to your own project.
 
 ## Citation
 
