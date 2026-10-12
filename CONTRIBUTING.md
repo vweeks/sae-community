@@ -16,7 +16,8 @@ Copy what you need (see [Install](README.md#install)), then make it fit your pro
   [`mcp/README.md`](mcp/README.md#make-it-yours) covers how, and its conformance suite
   checks your version through the protocol, whatever language you write it in.
 - **Cynicχl.** Edit the prompt for the failures common in your field, and make the same edit
-  in both files: `tests/cynic-kyle/` fails if they differ. Run the
+  in all three copies (`cynic-kyle.md`, `cynic-kyle.toml`, and the skill's
+  `references/prompt.md`): `tests/cynic-kyle/` fails if they differ. Run the
   [demos](agents/cynic-kyle/demos/) before and after. If the edited agent misses the flaw in
   demo 1, or invents problems in demo 2, the edit made it worse.
 - **`AGENTS.md`.** Fill the slots and delete what doesn't apply, as

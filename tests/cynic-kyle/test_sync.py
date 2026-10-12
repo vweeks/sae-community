@@ -1,15 +1,19 @@
-"""Checks that the two Cynicχl files say the same thing.
+"""Checks that every copy of the Cynicχl prompt says the same thing.
 
-cynic-kyle.md (Claude Code) and cynic-kyle.toml (Codex) carry one prompt in two formats.
-An edit to one that misses the other would make the agent behave differently by tool, so
-the prompt, name, and description must match, and both files must keep the agent read-only.
+cynic-kyle.md (Claude Code) and cynic-kyle.toml (Codex) carry one prompt in two formats, and
+the cynic-kyle-review skill carries a third copy for tools whose plugins can't install an
+agent. An edit to one that misses another would make the reviewer behave differently by
+tool, so the prompts, name, and description must match, and both agent files must keep the
+agent read-only.
 """
 
 import difflib
 import tomllib
 from pathlib import Path
 
-AGENT = Path(__file__).resolve().parents[2] / "agents" / "cynic-kyle"
+ROOT = Path(__file__).resolve().parents[2]
+AGENT = ROOT / "agents" / "cynic-kyle"
+SKILL = ROOT / "skills" / "cynic-kyle-review"
 READ_ONLY_TOOLS = {"Read", "Grep", "Glob"}
 
 
@@ -51,3 +55,17 @@ def test_both_versions_are_read_only():
     tools = {t.strip() for t in meta["tools"].split(",")}
     assert tools <= READ_ONLY_TOOLS, f"cynic-kyle.md grants {tools - READ_ONLY_TOOLS}"
     assert codex_agent()["sandbox_mode"] == "read-only"
+
+
+def test_skill_carries_the_same_prompt():
+    _, body = markdown_agent()
+    prompt = (SKILL / "references" / "prompt.md").read_text(encoding="utf-8")
+    assert prompt == body, "skills/cynic-kyle-review/references/prompt.md differs from cynic-kyle.md"
+
+
+def test_skill_starts_the_reviewer_without_the_conversation():
+    # Codex copies the whole conversation into a helper agent unless told fork_turns "none",
+    # which would let the reviewer see how the claim was reached.
+    text = (SKILL / "SKILL.md").read_text(encoding="utf-8")
+    assert '`fork_turns: "none"`' in text
+    assert "Don't use a fork" in text

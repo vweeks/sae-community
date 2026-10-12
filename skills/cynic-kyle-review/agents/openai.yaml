@@ -1,0 +1,6 @@
+# Codex-only settings. Other tools ignore this file; SKILL.md is the skill.
+interface:
+  display_name: "Cynicχl review"
+  short_description: "Have an adversarial reviewer try to break a plan or result"
+policy:
+  allow_implicit_invocation: true

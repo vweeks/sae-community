@@ -41,8 +41,10 @@ before writing up conclusions. Not on every step.
 | `cynic-kyle.toml` | The same agent for Codex. `developer_instructions` holds the same prompt. |
 | [`demos/`](demos/) | Three briefs to try it on, with what a good review should catch. |
 
-The two files must carry the same prompt. `tests/cynic-kyle/` at the repository root fails
-if they drift, so make every edit in both.
+The same prompt also ships as a skill,
+[`skills/cynic-kyle-review/`](../../skills/cynic-kyle-review/), for tools that can't install
+the agent (see below). All three copies must match: `tests/cynic-kyle/` at the repository
+root fails if they drift, so make every edit in all three.
 
 ## Install
 
@@ -56,8 +58,17 @@ everyone who works on the project. User folders apply to all your projects.
 
 This repository's Claude Code plugin also includes it (see the
 [top-level README](../../README.md)). Installed that way, its name carries the plugin's
-prefix: `sae-community:cynic-kyle`. Codex plugins carry skills and MCP servers but not
-custom agents (checked in Codex 0.162.1), so for Codex, copy the file.
+prefix: `sae-community:cynic-kyle`.
+
+Codex plugins can't carry custom agents (checked in Codex 0.162.1), so the Codex plugin
+gives you Cynicχl through the `cynic-kyle-review` skill instead. The skill hands the review
+to a `cynic-kyle` agent when one is installed. Otherwise it starts a helper agent with the
+same prompt and no conversation history. That helper runs with your session's permissions:
+the prompt tells it to only read, but the tool doesn't enforce that. Copy the `.toml` if you
+want read-only enforced. The skill is in the [Agent Skills](https://agentskills.io) format, so you can also copy its
+folder into another tool. Its fresh-eyes guarantee depends on that tool starting a helper
+agent without the conversation; when the tool can't, the skill gives you the prompt and
+brief to paste into a new session instead.
 
 Each tool says "read-only" its own way, and this is the one line that differs between the
 two files:
@@ -71,7 +82,10 @@ Ask for it by name, with the decision or claim and where its evidence is:
 
 - Claude Code: "Use the cynic-kyle subagent to review this plan before we run it", or
   `@agent-cynic-kyle`. Claude may also delegate to it on its own when the description fits.
-- Codex: "Have cynic-kyle review this plan before we run it."
+- Codex: "Have cynic-kyle review this plan before we run it, starting it with no
+  conversation history." Codex gives a helper agent a copy of the whole conversation
+  unless told otherwise, and the review works only if the reviewer hasn't seen how the
+  plan was reached. The `cynic-kyle-review` skill asks for this itself.
 
 If you installed it through the Claude Code plugin, use `sae-community:cynic-kyle` in place
 of `cynic-kyle`.

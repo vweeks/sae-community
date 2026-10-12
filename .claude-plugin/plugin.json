@@ -1,13 +1,15 @@
 {
   "name": "sae-community",
   "version": "0.1.0",
-  "description": "unit-check skill, Cynicχl subagent, and scidata-mcp server for scientific software work.",
+  "description": "unit-check skill, Cynicχl reviewer (agent and skill), and scidata-mcp server for scientific software work.",
   "author": {
     "name": "Victor Weeks"
   },
   "repository": "https://github.com/vweeks/sae-community",
   "license": "MIT",
-  "agents": ["./agents/cynic-kyle/cynic-kyle.md"],
+  "agents": [
+    "./agents/cynic-kyle/cynic-kyle.md"
+  ],
   "userConfig": {
     "data_root": {
       "type": "directory",
@@ -20,8 +22,12 @@
     "scidata": {
       "command": "uv",
       "args": [
-        "run", "--directory", "${CLAUDE_PLUGIN_ROOT}/mcp/python",
-        "scidata-mcp", "--data-root", "${user_config.data_root}"
+        "run",
+        "--directory",
+        "${CLAUDE_PLUGIN_ROOT}/mcp/python",
+        "scidata-mcp",
+        "--data-root",
+        "${user_config.data_root}"
       ],
       "env": {
         "UV_PROJECT_ENVIRONMENT": "${CLAUDE_PLUGIN_DATA}/scidata-venv"

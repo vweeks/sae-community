@@ -8,7 +8,7 @@
     {
       "name": "sae-community",
       "source": ".",
-      "description": "unit-check skill, Cynicχl subagent, and scidata-mcp server for scientific software work.",
+      "description": "unit-check skill, Cynicχl reviewer (agent and skill), and scidata-mcp server for scientific software work.",
       "category": "development"
     }
   ]

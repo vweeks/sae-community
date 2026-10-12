@@ -75,7 +75,9 @@ covers what belongs in this file and what belongs elsewhere.
 
 ## Which tools read it
 
-Codex, Cursor, GitHub Copilot, and Claude Code all read `AGENTS.md`. Claude Code reads it
-when the project has no `CLAUDE.md` (version 2.1.277 or later). If you also keep a
-`CLAUDE.md`, a line containing `@AGENTS.md` imports it, so both tools follow one file. Tool
-support changes quickly; check your tool's documentation.
+Codex, Cursor, GitHub Copilot, and Claude Code all read `AGENTS.md` (checked October 2026).
+Claude Code reads it when the project has no `CLAUDE.md` (version 2.1.277 or later). If you
+also keep a `CLAUDE.md`, a line containing `@AGENTS.md` imports it, so both tools follow one
+file. Gemini CLI reads `GEMINI.md` by default; add `AGENTS.md` to its `context.fileName`
+setting to have it read this file instead. Tool support changes quickly; check your tool's
+documentation.

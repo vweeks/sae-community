@@ -1,11 +1,11 @@
 {
   "name": "sae-community",
   "version": "0.1.0",
-  "description": "unit-check skill for scientific software work.",
+  "description": "unit-check skill and cynic-kyle-review skill for scientific software work.",
   "skills": "./skills/",
   "interface": {
     "displayName": "SAE community",
-    "shortDescription": "Check the units data declares before code converts or combines quantities.",
+    "shortDescription": "Check declared units, and have an adversarial reviewer try to break a plan or result.",
     "developerName": "Victor Weeks",
     "category": "Coding"
   }

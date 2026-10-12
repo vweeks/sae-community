@@ -56,7 +56,7 @@ def test_claude_agents_exist_and_are_agents():
 def test_skills_folder_holds_skills():
     skills = resolve(CODEX_PLUGIN["skills"])
     found = sorted(p.parent.name for p in skills.glob("*/SKILL.md"))
-    assert found, f"no SKILL.md under {skills}"
+    assert found == ["cynic-kyle-review", "unit-check"]
     for name in found:
         assert (skills / name / "agents" / "openai.yaml").is_file(), f"{name} lacks agents/openai.yaml"
 

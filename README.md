@@ -6,6 +6,12 @@ Each one is meant to be copied into your own project and adapted. They put into 
 the [Scientific Agentic Engineering framework](https://vweeks.github.io/scientific-agentic-engineering/framework/),
 and [`catalog.md`](catalog.md) maps each one to the patterns behind it.
 
+Every artifact uses an open format: [Agent Skills](https://agentskills.io) for the skills,
+the [Model Context Protocol](https://modelcontextprotocol.io) for the server, `AGENTS.md`
+for the instruction file, and plain Markdown for the subagent's prompt. You can use them
+with any AI coding tool that supports those formats. The repository was tested with Claude
+Code and Codex, and it includes plugins for those two.
+
 No maintenance is promised; see [scope and end date](#scope-and-end-date).
 
 ## What's here
@@ -14,7 +20,7 @@ No maintenance is promised; see [scope and end date](#scope-and-end-date).
 |---|---|---|
 | [`unit-check`](skills/unit-check/) | Skill | Code that converts or combines quantities using units it assumed instead of the units the data declares. |
 | [`scidata-mcp`](mcp/) | MCP server template (Python) | An agent answering from memory about what a dataset contains. |
-| [Cynicχl](agents/cynic-kyle/) (`cynic-kyle`) | Subagent | A plan or result accepted because nothing in the session tried to break it. |
+| [Cynicχl](agents/cynic-kyle/) (`cynic-kyle`) | Subagent, also packaged as a skill | A plan or result accepted because nothing in the session tried to break it. |
 | [`AGENTS.md` template](agents-md/) | Project instruction file | An agent filling gaps in your project's standing rules with plausible defaults. |
 
 Each folder's README starts with the failure in more detail, then covers how to use it.
@@ -43,30 +49,36 @@ These words get used loosely. Here they mean:
 
 ## Install
 
-There are two routes: copy the files you want, or install a plugin that brings several at
-once. The plugins carry fewer of the artifacts, as described below.
+There are two routes: copy the files you want, which works with any tool, or install the
+plugin for Claude Code or Codex, which brings several at once.
 
 ### Copy what you want
 
-| Artifact | Claude Code | Codex |
-|---|---|---|
-| `unit-check` | copy `skills/unit-check/` to `.claude/skills/unit-check/` | copy `skills/unit-check/` to `.agents/skills/unit-check/` |
-| Cynicχl | copy `agents/cynic-kyle/cynic-kyle.md` to `.claude/agents/` | copy `agents/cynic-kyle/cynic-kyle.toml` to `.codex/agents/` |
-| `scidata-mcp` | `claude mcp add`, as in [`mcp/README.md`](mcp/README.md#try-it) | an `[mcp_servers]` entry, as in [`mcp/README.md`](mcp/README.md#try-it) |
-| `AGENTS.md` | copy the template to your repository root, as in [`agents-md/README.md`](agents-md/README.md) | the same |
+| Artifact | Claude Code | Codex | Another tool |
+|---|---|---|---|
+| `unit-check` | copy `skills/unit-check/` to `.claude/skills/unit-check/` | copy `skills/unit-check/` to `.agents/skills/unit-check/` | copy the folder to your tool's skills folder; Cursor, GitHub Copilot, and Gemini CLI read `.agents/skills/` |
+| Cynicχl | copy `agents/cynic-kyle/cynic-kyle.md` to `.claude/agents/` | copy `agents/cynic-kyle/cynic-kyle.toml` to `.codex/agents/` | make a subagent in your tool's format from [`references/prompt.md`](skills/cynic-kyle-review/references/prompt.md), or use the skill below |
+| Cynicχl as a skill | copy `skills/cynic-kyle-review/` to `.claude/skills/cynic-kyle-review/` | copy `skills/cynic-kyle-review/` to `.agents/skills/cynic-kyle-review/` | copy the folder to your tool's skills folder |
+| `scidata-mcp` | `claude mcp add`, as in [`mcp/README.md`](mcp/README.md#try-it) | an `[mcp_servers]` entry, as in [`mcp/README.md`](mcp/README.md#try-it) | add the same command in your tool's MCP settings |
+| `AGENTS.md` | copy the template to your repository root, as in [`agents-md/README.md`](agents-md/README.md) | the same | the same, if your tool reads `AGENTS.md` |
 
-The paths above are project folders, shared with everyone who works on the project. Your
-tool's documentation gives the user-level folders, which apply to all your projects.
+The Claude Code and Codex paths above are project folders, shared with everyone who works
+on the project. For user-level folders, which apply to all your projects, and for other
+tools' locations, see your tool's documentation.
 
 This is the route to take if you mean to adapt an artifact, which is what they are for.
 
-### Install the plugin
+### Plugins for Claude Code and Codex
 
-The `AGENTS.md` template isn't in either plugin, because it belongs in your repository,
-not your tool.
+The hidden folders at the top of the repository hold these plugins' files: `.claude-plugin/`
+for Claude Code, and `.agents/plugins/` and `.codex-plugin/` for Codex. Each tool packages
+plugins its own way, so for any other tool, use the copy route above. (GitHub Copilot's
+documentation says its CLI and VS Code extension can also read Claude Code's plugin format;
+this plugin hasn't been tested there.) The `AGENTS.md`
+template isn't in either plugin, because it belongs in your repository, not your tool.
 
-**Claude Code** (tested with 2.1.296). The plugin carries `unit-check`, Cynicχl, and
-`scidata-mcp`; the MCP server needs [uv](https://docs.astral.sh/uv/).
+**Claude Code** (tested with 2.1.296). The plugin carries `unit-check`, Cynicχl as both an
+agent and a skill, and `scidata-mcp`; the MCP server needs [uv](https://docs.astral.sh/uv/).
 
 ```
 claude plugin marketplace add vweeks/sae-community
@@ -77,7 +89,7 @@ Inside a session, `/plugin marketplace add vweeks/sae-community` and
 `/plugin install sae-community@sae-community` do the same. Claude Code asks for the
 directory `scidata-mcp` may read. To give it on the command line instead, add
 `--config data_root=/path/to/data` to the install command. Installed this way, names
-carry the plugin's prefix: `sae-community:unit-check` and `sae-community:cynic-kyle`.
+carry the plugin's prefix, such as `sae-community:cynic-kyle`.
 
 **Codex** (tested with the 0.162.1 CLI; [Codex's documentation](https://developers.openai.com/codex/plugins)
 says the IDE extension doesn't support plugins):
@@ -87,9 +99,12 @@ codex plugin marketplace add vweeks/sae-community
 codex plugin add sae-community@sae-community
 ```
 
-Or run `/plugins` inside Codex. The Codex plugin carries `unit-check` only. Codex plugins
-don't carry custom agents, and a Codex plugin has no way to ask you for the directory
-`scidata-mcp` should read. For those two, use the copy route in the table above.
+Or run `/plugins` inside Codex. The Codex plugin carries `unit-check` and the `cynic-kyle-review`
+skill, which runs Cynicχl without installing it as an agent; Codex plugins can't carry
+agents, and the [Cynicχl README](agents/cynic-kyle/README.md#install) explains the
+difference. It leaves out
+`scidata-mcp`, because a Codex plugin has no way to ask you for the directory the server
+should read; add it to `config.toml` as in [`mcp/README.md`](mcp/README.md#try-it).
 
 ## Tests
 
